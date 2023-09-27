@@ -1,1 +1,28 @@
-index
+<h1>memoリスト</h1>
+
+<table>
+  <thead>
+    <th>
+      <tr>title</tr>
+      <tr>content</tr>
+      <tr>level</tr>
+    </th>
+  </thead>
+  <tbody>
+    <td>
+      <% @memos.each do |memo| %>
+        <tr><%= memo.title %></tr>
+        <tr><%= memo.message %></tr>
+        <tr><%= memo.level_i18n %></tr>
+      <% end %>
+    </td>
+  </tbody>
+</table>
+
+<%= form_with model: @memo, url: memos_path(@memo.id), method: :post do |f| %>
+  <div><%= f.text_field :title %></div>
+  <div><%= f.text_area :message %></div>
+  <div><%= f.select :level, [['低',0], ['中',1], ['高',2]] %></div>
+  <div><%= f.text_area :code %></div>
+  <div><%= f.submit "保存する" %></div>
+<% end %>
